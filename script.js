@@ -5,6 +5,9 @@ let playerWinCondition = 'XXX';
 let computerWinCondition = 'OOO';
 let cellsUsed = 0;
 let currentCellOccupied = false;
+let winAudio = new Audio("mixkit-achievement-bell-600.wav");
+let loseAudio = new Audio("mixkit-losing-piano-2024.wav");
+let soundEffect = new Audio("mixkit-dry-pop-up-notification-alert-2356.wav");
 function player(clicked)
 {
     let flag = 0;
@@ -21,6 +24,7 @@ function player(clicked)
                     {
                         document.getElementById(clicked).innerHTML = playerSign;
                         board[i][j] = playerSign;
+                        soundEffect.play();
                         cellsUsed++;
                         currentCellOccupied = false;
                         flag = 1;
@@ -184,6 +188,7 @@ function result()
             console.log("hello from result6");
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
             document.getElementsByClassName("result")[0].innerHTML = "You Win!";
+            winAudio.play();
             flag = 1;
             return 1;
         }
@@ -191,6 +196,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            loseAudio.play();
             flag = 1;
             return 1;
         }
@@ -198,6 +204,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "You Win!";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            winAudio.play();
             flag = 1;
             return 1;
         }
@@ -205,6 +212,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            loseAudio.play();
             flag = 1;
             return 1;
         }
@@ -212,6 +220,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "You Win!";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            winAudio.play();
             flag = 1;
             return 1;
         }
@@ -219,6 +228,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            loseAudio.play();
             flag = 1;
             return 1;
         }
@@ -226,6 +236,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "You Win!";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            winAudio.play();
             flag = 1;
             return 1;
         }
@@ -233,6 +244,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            loseAudio.play();
             flag = 1;
             return 1;
         }
@@ -240,6 +252,7 @@ function result()
         {
             document.getElementsByClassName("result")[0].innerHTML = "Draw";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
+            soundEffect.play();
             return 2;
         }
     }
