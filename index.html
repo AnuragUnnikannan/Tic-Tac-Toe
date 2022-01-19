@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,29 +8,30 @@
     <link rel="shortcut icon" href="tac_tic_toe_icon_183167.png" type="image/x-icon">
     <title>Tic-Tac-Toe</title>
 </head>
-
 <body>
     <script src="script.js"></script>
-    <h1>Tic-Tac-Toe</h1>
 
+    <h1>Tic-Tac-Toe</h1>
     <div class="container">
-        <div class="box" id="box1" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box2" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box3" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box4" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box5" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box6" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box7" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box8" onclick="player(this.id); computer(); result();"></div>
-        <div class="box" id="box9" onclick="player(this.id); computer(); result();"></div>
+        <div class="box" id="box0" onclick="play(this.id)"></div>
+        <div class="box" id="box1" onclick="play(this.id)"></div>
+        <div class="box" id="box2" onclick="play(this.id)"></div>
+        <div class="box" id="box3" onclick="play(this.id)"></div>
+        <div class="box" id="box4" onclick="play(this.id)"></div>
+        <div class="box" id="box5" onclick="play(this.id)"></div>
+        <div class="box" id="box6" onclick="play(this.id)"></div>
+        <div class="box" id="box7" onclick="play(this.id)"></div>
+        <div class="box" id="box8" onclick="play(this.id)"></div>
     </div>
 
     <div class="wrapper">
         <div class="result-box">
-            <p class="result"></p>
-            <button onclick="location.reload()">New Game</button>
+            <p class="info"></p>
+            <div class="buttons">
+                <button onclick="location.reload()">New Game</button>
+                <button onclick="hideResult()">Close</button>
+            </div>
         </div>
     </div>
 </body>
-
 </html>

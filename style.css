@@ -1,40 +1,29 @@
 body {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    height: 100vh;
     justify-content: center;
     align-items: center;
+    gap: 1.875rem;
     background: linear-gradient(#000428, #004e92);
     color: rgb(245, 221, 11);
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
 }
 
-.container{
+.container {
     display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+    grid-template-rows: repeat(3, 6.25rem);
+    grid-template-columns: repeat(3, 6.25rem);
 }
 
-.box{
-    background-color: rgb(9, 130, 160);
-    padding: 5px;
-    margin: 3px;
+.box {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 4.375rem;
+    background: rgb(9, 130, 160);
+    margin: 0.1875rem;
     cursor: pointer;
-}
-
-#box1, #box2, #box3, #box4, #box5, #box6, #box7, #box8, #box9 {
-    transition: ease-in-out 0.25s;
-}
-
-#box1:hover, #box2:hover, #box3:hover, #box4:hover, #box5:hover, #box6:hover, #box7:hover, #box8:hover, #box9:hover{
-    transition: ease-in-out 0.25s;
-    background: rgb(245, 221, 11);
-    color:rgb(9, 130, 160);
 }
 
 .wrapper {
@@ -55,9 +44,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 25px;
-    height: 120px;
-    width: 350px;
+    padding: 1.5625rem;
+    height: 7.5rem;
+    width: 21.875rem;
     border-radius: 18px;
     box-shadow:  4px 4px 8px rgb(92, 146, 190),
              -11px -11px 22px #004e92;
@@ -67,20 +56,25 @@ body {
 
 @keyframes fadein{
     from {
-        height: 50px;
-        width: 100px;
+        height: 3.125rem;
+        width: 6.25rem;
         opacity: 0;
     }
     to {
-        height: 120px;
-        width: 350px;
+        height: 7.5rem;
+        width: 21.875rem;
         opacity: 1;
     }
 }
 
-.result {
+.info {
     font-size: 30px;
     font-weight:  bold;
+}
+
+.buttons {
+    display: flex;
+    gap: 3rem;
 }
 
 button {
@@ -93,10 +87,25 @@ button {
     color: rgb(184, 209, 230);
     font-weight: bold;
     transition: ease-in-out 0.25s;
+    width: 9.5rem;
 }
 
 button:hover {
     background: rgb(245, 221, 11);
     color:rgb(9, 130, 160);
     transition: ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+@media (min-width:768px) {
+
+    .box {
+        transition: ease-in-out 0.25s;
+    }
+
+    .box:hover {
+        background: rgb(245, 221, 11);
+        color: rgb(9, 130, 160);
+        transition: ease-in-out 0.25s;
+    }
 }

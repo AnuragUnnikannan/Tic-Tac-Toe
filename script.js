@@ -1,260 +1,108 @@
-let board = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']];
-let playerSign = 'X';
-let computerSign = 'O';
-let playerWinCondition = 'XXX';
-let computerWinCondition = 'OOO';
-let cellsUsed = 0;
-let currentCellOccupied = false;
+let board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
+let boxFilled = 0;
+let winner = "";
 let winAudio = new Audio("mixkit-achievement-bell-600.wav");
 let loseAudio = new Audio("mixkit-losing-piano-2024.wav");
 let soundEffect = new Audio("mixkit-dry-pop-up-notification-alert-2356.wav");
-function player(clicked)
-{
-    let flag = 0;
-    if(result() == 0)
-    {
-        while(flag != 1)
-        {
-            for(let i = 0;i<3;i++)
-            {
-                for(let j = 0;j<3;j++)
-                {
-                    let pos = clicked.charAt(clicked.length-1)
-                    if(board[i][j] === pos)
-                    {
-                        document.getElementById(clicked).innerHTML = playerSign;
-                        board[i][j] = playerSign;
-                        soundEffect.play();
-                        cellsUsed++;
-                        currentCellOccupied = false;
-                        flag = 1;
-                        break;
-                    }
-                }
-            }
-            if(flag === 0)
-            {
-                console.log("Position already occupied");
-                currentCellOccupied = true;
-                return 0;
-            }
-        }
-    }
-    console.log(board);
-    return board;
-}
 
 function computer()
 {
-    if(result() == 0 && currentCellOccupied === false)
+    let x = Math.floor(Math.random()*9);
+    if(board[x] != "X" && board[x] != "O")
     {
-        let flag = 0;
-        let xo_counter = 0;
-        while(flag != 1)
+        board[x] = "O";
+        document.getElementById("box"+x).textContent = "O";
+        boxFilled++;
+    }
+    else if(boxFilled != 9)
+    {
+        computer();
+    }
+}
+
+function play(clicked)
+{
+    if(winner === "")
+    {
+        let boxText = document.getElementById(clicked).textContent;
+        if(boxText === "")
         {
-            let x = Math.floor(Math.random()*10);
-            let pos = x.toString();
-            for(let i = 0;i<3;i++)
-            {
-                for(let j = 0;j<3;j++)
-                {
-                    if(board[i][j] === pos)
-                    {
-                        console.log("box"+pos);
-                        document.getElementById("box"+pos).innerHTML = computerSign;
-                        board[i][j] = computerSign;
-                        cellsUsed++;
-                        flag = 1;
-                        break;
-                    }
-                    /* else if(board[i][j] === 'X' || board[i][j] === 'O')
-                    {
-                        xo_counter++;
-                    } */
-                }
-            }
-            if(cellsUsed === 9)
-            {
-                console.log("Position already occupied computer");
-                break;
-            }
+            document.getElementById(clicked).textContent = "X";
+            board[parseInt(clicked.charAt(clicked.length-1))] = "X";
+            soundEffect.play();
+            boxFilled++;
+            checkWinner(boxFilled);
+            computer();
+            checkWinner(boxFilled);
+        }
+        else
+        {
+            console.log("Already Occupied");
         }
     }
 }
 
-function checkRow()
+function checkWinner(boxFilled)
 {
-    for(let i = 0;i<3;i++)
+    if(board[0] === board[1] && board[1] === board[2])
     {
-        let s = "";
-        for(let j = 0;j<3;j++)
-        {
-            s = s + board[i][j];
-        }
-        if(s === playerWinCondition)
-        {
-            return 1;
-        }
-        else if(s === computerWinCondition)
-        {
-            return 2;
-        }
+        winner = board[0];
     }
-    return 0;
-}
-
-function checkColumn()
-{
-    for(let i = 0;i<3;i++)
+    else if(board[3] === board[4] && board[4] === board[5])
     {
-        let s = "";
-        for(let j = 0;j<3;j++)
-        {
-            s = s + board[j][i];
-        }
-        if(s === playerWinCondition)
-        {
-            return 1;
-        }
-        else if(s === computerWinCondition)
-        {
-            return 2;
-        }
+        winner = board[3];
     }
-    return 0;
-}
-
-function checkLeftDiagonal()
-{
-    let s = "";
-    for(let i = 0;i<3;i++)
+    else if(board[6] === board[7] && board[7] === board[8])
     {
-        for(let j = 0;j<3;j++)
-        {
-            if(i == j)
-            {
-                s = s + board[i][j];
-            }
-        }
+        winner = board[6];
     }
-    if(s === playerWinCondition)
+    else if(board[0] === board[3] && board[3] === board[6])
     {
-        return 1;
+        winner = board[0];
     }
-    else if(s === computerWinCondition)
+    else if(board[1] === board[4] && board[4] === board[7])
     {
-        return 2;
+        winner = board[1];
+    }
+    else if(board[2] === board[5] && board[5] === board[8])
+    {
+        winner = board[2];
+    }
+    else if(board[0] === board[4] && board[4] === board[8])
+    {
+        winner = board[0];
+    }
+    else if(board[2] === board[4] && board[4] === board[6])
+    {
+        winner = board[2];
     }
     else
     {
-        return 0;
-    }
-}
-
-function checkRightDiagonal()
-{
-    let s = "";
-    for(let i = 0;i<3;i++)
-    {
-        for(let j = 0;j<3;j++)
+        if(boxFilled === 9)
         {
-            if(i + j === 2)
-            {
-                s = s + board[i][j];
-            }
-        }
-    }
-    if(s === playerWinCondition)
-    {
-        return 1;
-    }
-    else if(s === computerWinCondition)
-    {
-        return 2;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-function result()
-{
-    let flag = 0;
-    if(cellsUsed >= 6)
-    {
-        if(checkRow() === 1)
-        {
-            console.log("hello from result6");
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            document.getElementsByClassName("result")[0].innerHTML = "You Win!";
-            winAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkRow() === 2)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            loseAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkColumn() === 1)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "You Win!";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            winAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkColumn() === 2)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            loseAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkLeftDiagonal() === 1)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "You Win!";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            winAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkLeftDiagonal() === 2)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            loseAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkRightDiagonal() === 1)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "You Win!";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            winAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(checkRightDiagonal() === 2)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "Computer Wins";
-            document.getElementsByClassName("wrapper")[0].style.display = "flex";
-            loseAudio.play();
-            flag = 1;
-            return 1;
-        }
-        else if(flag === 0 && cellsUsed === 9)
-        {
-            document.getElementsByClassName("result")[0].innerHTML = "Draw";
+            document.getElementsByClassName("info")[0].textContent = "Draw";
             document.getElementsByClassName("wrapper")[0].style.display = "flex";
             soundEffect.play();
-            return 2;
+            return "draw";
         }
     }
-    return 0;
+
+    if(winner === "X")
+    {
+        document.getElementsByClassName("info")[0].textContent = "You win!";
+        document.getElementsByClassName("wrapper")[0].style.display = "flex";
+        winAudio.play();
+    }
+    else if(winner === "O")
+    {
+        document.getElementsByClassName("info")[0].textContent = "Computer Wins!";
+        document.getElementsByClassName("wrapper")[0].style.display = "flex";
+        loseAudio.play();
+    }
+    return winner;
+}
+
+function hideResult()
+{
+    document.getElementsByClassName("wrapper")[0].style.display = "none";
 }
