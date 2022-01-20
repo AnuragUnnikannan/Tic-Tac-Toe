@@ -1,29 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.875rem;
+    gap: 2.5rem;
     background: linear-gradient(#000428, #004e92);
     color: rgb(245, 221, 11);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100vh;
+    user-select: none;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.board {
     display: grid;
-    grid-template-rows: repeat(3, 6.25rem);
-    grid-template-columns: repeat(3, 6.25rem);
+    grid-template-rows: repeat(3, 6.8rem);
+    grid-template-columns: repeat(3, 6.8rem);
 }
 
 .box {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 4.375rem;
+    font-size: 4rem;
     background: rgb(9, 130, 160);
     margin: 0.1875rem;
     cursor: pointer;
+    transition: all ease-in-out 0.5s;
+    font-weight: bold;
 }
 
 .wrapper {
@@ -44,9 +62,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1.5625rem;
-    height: 7.5rem;
-    width: 21.875rem;
+    padding: 3.5rem;
+    height: 5rem;
+    width: 18rem;
     border-radius: 18px;
     box-shadow:  4px 4px 8px rgb(92, 146, 190),
              -11px -11px 22px #004e92;
@@ -56,45 +74,46 @@ body {
 
 @keyframes fadein{
     from {
-        height: 3.125rem;
-        width: 6.25rem;
+        height: 0rem;
+        width: 12rem;
         opacity: 0;
     }
     to {
-        height: 7.5rem;
-        width: 21.875rem;
         opacity: 1;
     }
 }
 
+.yellow-button {
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgb(245, 221, 11);
+    color:rgb(9, 130, 160);
+}
+
+.yellow-button:hover{
+    color: rgb(68, 68, 68);
+}
+
 .info {
-    font-size: 30px;
-    font-weight:  bold;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .buttons {
     display: flex;
-    gap: 3rem;
+    gap: 1rem;
 }
 
 button {
-    padding: 10px 30px;
+    padding: 0.8rem 0.5rem;
     border-radius: 18px;
     background: rgb(9, 130, 160);
     border: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 17px;
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
     color: rgb(184, 209, 230);
     font-weight: bold;
     transition: ease-in-out 0.25s;
-    width: 9.5rem;
-}
-
-button:hover {
-    background: rgb(245, 221, 11);
-    color:rgb(9, 130, 160);
-    transition: ease-in-out 0.25s;
-    cursor: pointer;
+    width: 10rem;
 }
 
 @media (min-width:768px) {
@@ -107,5 +126,19 @@ button:hover {
         background: rgb(245, 221, 11);
         color: rgb(9, 130, 160);
         transition: ease-in-out 0.25s;
+    }
+
+    button:hover {
+        background: rgb(245, 221, 11);
+        color:rgb(9, 130, 160);
+        transition: ease-in-out 0.25s;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 480px) {
+
+    html {
+        font-size: 80%;
     }
 }
